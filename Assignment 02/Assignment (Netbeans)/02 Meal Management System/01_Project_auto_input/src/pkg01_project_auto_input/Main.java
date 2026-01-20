@@ -2,7 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package pkg01_project_user_input;
+package pkg01_project_auto_input;
+
 import java.util.*;
 
 interface Meal{
@@ -126,89 +127,29 @@ class MealManager{
         }
         return sum;
     }
-} 
-
-//---------------------------------Main class---------------------------------
+}
 public class Main {
 
     public static void main(String[] args) {
+       
+        MealManager m = new MealManager();
         
-        Scanner input = new Scanner(System.in);
-        MealManager meal = new MealManager();
+        Meal m1 = new StandardMeal("Naim", 5600);
+        Meal m2 = new StandardMeal("Murshid", 4500);
+        Meal m3 = new ComboMeal("Mizanur", 3500);
+        Meal m4 = new ComboMeal("Oli", 4000);
+        Meal m5 = new DiscountMeal("Murshid",5600,0.25);
         
-        while(true){
-            System.out.println();
-            System.out.print("Enter the meal number: ");
-            int number = input.nextInt();
-            
-            if(number == 0)
-                System.out.println("Work Stop");
-            
-            switch(number){
-                case 1: {
-                    System.out.print("Mela name is: ");
-                    String name = input.nextLine();
-                    input.nextLine();
-                    
-                    System.out.print("Enter base price is: ");
-                    double price = input.nextDouble();
-                    
-                    Meal m1 = new StandardMeal(name,price);
-                    meal.add_meal(m1);
-                }
-                
-                case 2: {
-                    System.out.print("Mela name is: ");
-                    String name = input.nextLine();
-                    input.nextLine();
-                    
-                    System.out.print("Enter base price is: ");
-                    double price = input.nextDouble();
-                    
-                    Meal m2 = new ComboMeal(name,price);
-                    meal.add_meal(m2);
-                }
-                
-                case 3: {
-                    System.out.print("Mela name is: ");
-                    String name = input.nextLine();
-                    input.nextLine();
-                    
-                    System.out.print("Enter base price is: ");
-                    double price = input.nextDouble();
-                    System.out.print("Enter DescoutnPercentage: ");
-                    double des = input.nextDouble();
-                    
-                    Meal m3 = new DiscountMeal(name,price,des);
-                    meal.add_meal(m3);
-                }
-                
-                case 4: {
-                    meal.display();
-                    break;
-                }
-                
-                case 5: {
-                    System.out.print("Remove meal: ");
-                    int remove = input.nextInt();
-                    meal.del_meal(remove);
-                    break;
-                }
-                
-                case 6: {
-                    System.out.println("Total Revenue: " + meal.total_revenue());
-                    break;
-                }
-                
-                case 0: {
-                    System.out.println();
-                    input.close();
-                    return;
-                }
-                default:
-                    System.out.println("Invalid meal Meal");
-            }
-        }
+        m.add_meal(m1);
+        m.add_meal(m2);
+        m.add_meal(m3);
+        m.add_meal(m4);
+        m.add_meal(m5);
+        
+        m.display();
+        m.del_meal(2);
+        
+        System.out.println("Total Revenue: " + m.total_revenue());
     }
     
 }
