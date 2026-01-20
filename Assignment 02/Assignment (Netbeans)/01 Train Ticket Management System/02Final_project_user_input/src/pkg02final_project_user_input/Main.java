@@ -2,10 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package pkg01final_project_auto_input;
-
-import java.util.ArrayList;
-import java.util.Iterator;
+package pkg02final_project_user_input;
+import java.util.*;
 
 abstract class Ticket{
     int ticket_id;
@@ -93,7 +91,7 @@ class FirstClassTicket extends Ticket{
 } 
 
 class TicketManager{
-    ArrayList<Ticket> ticket = new ArrayList<Ticket>();
+    ArrayList<Ticket> ticket = new ArrayList<>();
     
     //add ticket;
     void add_ticket(Ticket t){
@@ -147,25 +145,100 @@ class TicketManager{
 }
 public class Main {
 
-    
     public static void main(String[] args) {
         
-        Ticket t = new StandardTicket(12154255,"Dhaka","Gaibandha","12-03-26",19,615);
-        t.display_info();
+        Scanner s = new Scanner(System.in);
+        TicketManager t = new TicketManager();
         
-        Ticket fir = new FirstClassTicket(854854555,"Dhaka","Comilla","15-02-2026",05,405,30);
-        fir.display_info();    
-        
-        TicketManager manager = new TicketManager();
-        manager.add_ticket(t);
-        manager.add_ticket(fir);
-        manager.display_all();
-        
-        manager.search_info(854854555);
-        manager.del_ticket(12154255);
+        while(true){
+            System.out.println();
+            System.out.print("Enter choice: ");
+            int choice = s.nextInt();
+            
+        if(choice==0){
+            System.out.println("Work is Stoped");
+        }
         
         
-        System.out.println("Total Revenue: " + manager.total_revenue());
+        switch(choice){
+            case 1: {
+                System.out.print("Ticket Id is: ");
+                int id = s.nextInt();
+                s.nextLine();
+                
+                System.out.print("Origin is: ");
+                String or = s.nextLine();
+                
+                System.out.print("Destination is: ");
+                String des = s.nextLine();
+                
+                System.out.print("Date is: ");
+                String dat = s.nextLine();
+                
+                System.out.print("Seat Number: ");
+                int seat = s.nextInt();
+                
+                System.out.print("Base Price: ");
+                double base = s.nextDouble();
+                
+                Ticket t1 = new StandardTicket(id,or,des,dat,seat,base);
+                t.add_ticket(t1);
+                break; 
+            }
+            case 2 : {
+                System.out.print("Ticket Id is: ");
+                int id = s.nextInt();
+                s.nextLine();
+                
+                System.out.print("Origin is: ");
+                String or =s.nextLine();
+                
+                System.out.print("Destination is: ");
+                String des = s.nextLine();
+                
+                System.out.print("Date is: ");
+                String dat = s.nextLine();
+                
+                System.out.print("Seat Number: ");
+                int seat = s.nextInt();
+                
+                System.out.print("Base Price: ");
+                double base = s.nextDouble();
+                
+                System.out.print("First Class Survice Charge: ");
+                double survice = s.nextDouble();
+                
+                Ticket t2 = new FirstClassTicket(id,or,des,dat,seat,base,survice);
+                t.add_ticket(t2);
+                break;
+            }
+            case 3: {
+                t.display_all();
+                break;
+            }
+            case 4: {
+                System.out.print("Find ticket id: ");
+                int id = s.nextInt();
+                t.search_info(id);
+                break;
+            }
+            case 5: {
+                System.out.print("Ticket id delete: ");
+                int id = s.nextInt();
+                t.del_ticket(id);
+                break;
+            }
+            case 6: {
+                System.out.print("Total revenue: " + t.total_revenue());
+                break;
+            }
+            default: 
+                System.out.println("Invalid Choice");
+        }
+        s.close();
+     
+       }
+        
     }
     
 }
